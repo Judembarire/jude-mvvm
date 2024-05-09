@@ -31,10 +31,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import net.ezra.R
 
 @Composable
-fun Guide(){
+fun GuideScreen( navController: NavHostController){
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -299,7 +301,7 @@ fun Guide(){
                         Column(
                               modifier = Modifier
                                   .fillMaxWidth()
-                                  .height(200.dp)
+                                  .height(400.dp)
                                   .background(Color(0xffffffff))
                                   .padding(10.dp)
                                ) {
@@ -320,7 +322,11 @@ fun Guide(){
                               
                                 
                                 ) {
-                                Text(text = "Add to Plants")
+                                Text(
+                                    text = "Add to Plants",
+
+
+                                    )
                             }
 
                                   }
@@ -340,5 +346,5 @@ fun Guide(){
 @Preview(showBackground = true)
 @Composable
 fun PreviewLight() {
-    Guide()
+    GuideScreen(rememberNavController())
 }

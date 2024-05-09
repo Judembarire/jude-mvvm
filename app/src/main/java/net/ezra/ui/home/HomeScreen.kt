@@ -47,6 +47,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,8 +58,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import net.ezra.R
+import net.ezra.navigation.ROUTE_GUIDE
 import net.ezra.navigation.ROUTE_HOME
 import net.ezra.navigation.ROUTE_PLANT
+import net.ezra.navigation.ROUTE_VIEW
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -214,7 +217,12 @@ fun HomeScreen( navController: NavHostController){
                                                     modifier = Modifier
                                                         .size(150.dp, 150.dp)
                                                         .background(Color.Transparent)
-                                                        .clip(RoundedCornerShape(16.dp)),
+                                                        .clip(RoundedCornerShape(16.dp))
+                                                        .clickable {
+                                                            navController.navigate(ROUTE_VIEW) {
+                                                                popUpTo(ROUTE_HOME) { inclusive = true }
+                                                            }
+                                                        },
 
                                                     painter = painterResource(id = R.drawable.spiderplant),
                                                     contentDescription = ""
@@ -360,29 +368,54 @@ fun HomeScreen( navController: NavHostController){
                                 Column{
                                     Card(
                                         modifier = Modifier
-                                            .width(180.dp)
+                                            .width(150.dp)
                                             .height(130.dp),
                                         colors = CardDefaults.cardColors(Color(0xFF746F6F))
 
                                     ) {
-//                        Image(
-//                            modifier = Modifier
-//                                .size(150.dp, 150.dp)
-//                                .background(Color.Transparent)
-//                                .clip(RoundedCornerShape(16.dp)),
-//
-//                            painter = painterResource(id = R.drawable.spiderplant),
-//                            contentDescription = ""
-//                        )
+                                        Box(
+                                            modifier = Modifier
+                                                .height(130.dp)
+                                                .width(150.dp),
+                                            contentAlignment = Alignment.BottomStart
+                                        ) {
+
+                                            Image(
+                                                modifier = Modifier
+                                                    .background(Color.Transparent)
+                                                    .clip(RoundedCornerShape(16.dp))
+                                                    .fillMaxSize()
+                                                    .clickable {
+                                                        navController.navigate(ROUTE_GUIDE) {
+                                                            popUpTo(ROUTE_HOME) { inclusive = true }
+                                                        }
+                                                    },
+
+                                                painter = painterResource(id = R.drawable.spiderplant),
+                                                contentDescription = "",
+
+
+                                                contentScale = ContentScale.Crop
+
+                                            )
+                                            Text(
+                                                text = "Spiderplant",
+                                                fontSize = 20.sp,
+                                                fontWeight = FontWeight.Bold,
+
+                                                modifier = Modifier.padding(7.dp)
+
+                                                )
+                                        }
                                     }
                                 }
 
-                                Spacer(modifier = Modifier.width(20.dp))
+                                Spacer(modifier = Modifier.width(40.dp))
 
                                 Column{
                                     Card(
                                         modifier = Modifier
-                                            .width(180.dp)
+                                            .width(150.dp)
                                             .height(130.dp),
                                         colors = CardDefaults.cardColors(Color(0xFF746F6F))
 
